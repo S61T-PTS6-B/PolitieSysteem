@@ -1,0 +1,205 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-mrt-2016, 21:38:28
+    Author     : koenv
+*/
+body {
+    font-family: sans-serif;
+    overflow: hidden;
+    width:  1500px;
+    margin : auto;
+    display : block;
+
+}
+overzichtTitle{
+    padding: 8px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+
+#licenseTable{
+    width:  300px;
+    display: block;
+    float: left;
+}
+#form{
+    width: 1100px;
+    display: block;
+    margin-right: 50px;
+    float : right;
+    padding:8px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 20px;
+}
+
+.myButton {
+	background-color:transparent;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:17px;
+	
+	text-decoration: underline;
+        border: none;
+        
+}
+.myButton:hover {
+	background-color:transparent;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.myLink {
+    width: 100%;
+    background-color: grey;
+    color: white;
+    padding: 14px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+#persoonWrapper {
+    margin-left: 5em;
+    width: 30%;
+    float: left;
+}
+
+#cartrackerWrapper {
+    margin-left: 5em;
+    width: 30%;
+    float: left;
+}
+
+#wrapper {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#wrappercenter {
+    width: 170em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#divborder {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+#divbordercar {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+#nawlist {
+    width: 16%;
+    padding: 12px 20px;
+    margin: 4px 0;
+    margin-top: 30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#changeCar {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.linkMember {
+    float: right;
+}
+
+#form input{
+    width:250px;
+    margin: 8px;
+    
+}
+
+#form1{
+    display:block;
+    float:left;
+    width:290px;
+}
+
+#form2{
+    display:block;
+  float:left;
+    width:290px;
+    margin-left:115px;
+}
+#form3{
+    display:block;
+    float:right;
+    width:290px;
+}
+
+#form a{
+    font-weight: bold;
+}
+
+a.overzicht{
+    padding-top:8px;
+    padding-bottom:8px;
+    font-size: 23px;
+}
+a.autogegevens,a.eigenaar{
+    font-size: 20px;
+    margin-right:900px;
+}
+
+

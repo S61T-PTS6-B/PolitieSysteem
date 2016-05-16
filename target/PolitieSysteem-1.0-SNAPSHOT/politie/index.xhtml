@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="default.css"  />
+        <h:outputStylesheet library="css" name="nav.css"  />
+         <title>Overzicht</title>
+         <script type="text/javascript">
+         // <![CDATA[
+        // var ws = new WebSocket("ws://localhost:8080/RekeningAdministratieOverheid/CarTrackerSocket");
+         var text = '[' +
+'{ "firstName":"John" , "lastName":"Doe" },' +
+'{ "firstName":"Anna" , "lastName":"Smith" },' +
+'{ "firstName":"Peter" , "lastName":"Jones" } ]';
+            
+           var array;
+           var openobject;
+            function loadArray(){
+                var table = document.getElementById("goof");
+                table.innerHTML = "<th>Entries</th>";
+                  var received_msg =  #{politieBean.stolenCars};
+                  array = received_msg;
+                  
+                  console.log(received_msg);
+                  console.log(received_msg.length);
+                  console.log(#{politieBean.stolenCars});
+                  for (var i = 0; i < received_msg.length; i++)
+                    {
+                        var row = table.insertRow(i);
+                        var object = received_msg[i];
+                        console.log(object);                       
+                        row.innerHTML = "<td><a onclick=\"setForm('" + object["license"] + "')\">" + received_msg[i]["license"] + "</a></td>";
+                //<td><input type=\"checkbox\" value=\"following\" onclick=\"checkboxValueChanged('" + username + "', this)\"";
+                        table.appendChild(row);
+                    }
+            }
+         function WebSocketTest()
+         {
+            if ("WebSocket" in window)
+            {
+               
+               // Let us open a web socket
+               
+		var ws = new WebSocket("ws://localhost:9998/echo");		
+               ws.onopen = function()
+               {
+                  // Web Socket is connected, send data using send()
+                  console.log("sending object");
+               };
+				
+               ws.onmessage = function (evt) 
+               { 
+                  var table = document.getElementById("goof");
+                  var received_msg = JSON.parse(evt.data);
+                  console.log(received_msg);                 
+                        document.getElementById("hoi:txbrandCar").value = received_msg[i]["brand"];
+                        document.getElementById("hoi:txmodelCar").value = received_msg[i]["model"];
+                        document.getElementById("hoi:txlicensePlate").value = received_msg[i]["license"];
+                        document.getElementById("hoi:txpriceCategory").value = received_msg[i]["price"];
+                        document.getElementById("txfirstName").value = received_msg[i]["firstname"];
+                        document.getElementById("txlastName").value = received_msg[i]["lastname"];
+                        document.getElementById("txcity").value = received_msg[i]["city"];
+                        document.getElementById("txadress").value = received_msg[i]["address"];
+                        document.getElementById("txbsn").value = received_msg[i]["bsn"];
+                        document.getElementById("txnumber").value = received_msg[i]["number"];
+                        document.getElementById("txtelePhone").value = received_msg[i]["telephone"];
+                        document.getElementById("txzipCode").value = received_msg[i]["zipcode"];
+                        document.getElementById("txeMail").value = received_msg[i]["email"];                    
+               };
+				
+               ws.onclose = function()
+               { 
+                  // websocket is closed.
+                  alert("Connection is closed..."); 
+               };
+            }
+            
+            else
+            {
+               // The browser doesn't support WebSocket
+               alert("WebSocket NOT supported by your Browser!");
+            }
+         }
+         function send(object){
+             ws.send("{bsn: "+ object +"}");
+             console.log(object.toString());
+         }
+         function setForm(object){
+            var text = object;
+            for (var i = 0; i < array.length; i++)
+            {
+                if(text === array[i]["license"])
+                {
+                    
+                    console.log(array[i]["brand"]);
+                    document.getElementById("hoi:txbrandCar").value = array[i]["brand"];
+                    document.getElementById("hoi:txmodelCar").value = array[i]["model"];
+                    document.getElementById("hoi:txlicensePlate").value = array[i]["license"];
+                    document.getElementById("hoi:txpriceCategory").value = array[i]["price"];
+                }
+            }
+         }
+         
+         function addCar(){
+             document.getElementById("txbrandCar").value = "";
+             document.getElementById("txmodelCar").value = "";
+             document.getElementById("txlicensePlate").value = "";
+             document.getElementById("txpriceCategory").value = "";
+         }
+         // ]]>
+        </script>
+    </h:head>
+    <body onload="javascript:loadArray()">
+        #{politieBean.init()}
+        <div id="nav" class='balk'>
+            <ul>
+                <li><a class="active" href="index.xhtml">Overzicht</a></li>
+                <li><a href="tracking">Tracking</a></li>
+                
+            </ul>
+        </div>
+        <div id='title'>
+        <h1>Overzicht Gestolen auto's</h1>
+        </div>
+        
+       
+        <div id="licenseTable">
+        <table id="goof" value ="Entrys">
+            <th>Entrys</th>
+        </table>
+        </div>
+        <div id="form">
+            <a class="overzicht">Overzicht</a>
+        <br/>
+        <a class="autogegevens">Auto-Gegevens</a>
+        <br/>
+        <h:form id="hoi">
+        <div id="form1">
+            <a>Brand Car</a><h:inputText readonly="true" id="txbrandCar" class="txbrandCar" value="#{politieBean.brandCar}"/>
+            <a>Price Catagory</a><h:inputText readonly="true" id="txpriceCategory" class="txpriceCategory" value="#{politieBean.priceCatagory}"/>
+        </div>
+        <div id="form2">
+            <a>Model Car</a><h:inputText readonly="true" id="txmodelCar" class="txmodelCar" value="#{politieBean.modelCar}"/>
+        </div>
+        <div id="form3">
+            <a>License plate</a><h:inputText readonly="true" id="txlicensePlate" class="txlicensePlate" value="#{politieBean.licensePlate}"/>
+        </div>
+           
+        
+         <a class="eigenaar">Eigenaar</a>
+         <br/>
+         <div id="form1">
+         <a>bsn</a><input type="text" id="txbsn" class="bsn"/>
+          <a>adress</a><input type="text" id="txadress" class="txadress"/>
+          <a>city</a><input type="text" id="txcity" class="txcity"/>
+         
+         </div>
+         
+         <div id="form2">
+         <a>voornaam</a> <input type="text" id="txfirstName" class="txfirstName"/>       
+         <a>number</a><input type="text" id="txnumber" class="txnumber"/>
+         <a>telephone</a><input type="text" id="txtelePhone" class="txtelePhone"/>  
+         </div>
+       
+         <div id="form3">
+         <a>achternaam</a><input type="text" id="txlastName" class="txlastName"/>
+         <a>zipcode</a><input type="text" id="txzipCode" class="txzipCode"/>
+         <a>email</a><input type="text" id="txeMail" class="txeMail"/>
+         </div>
+         <input type="text" id="txInputSearch" placeholder="licenseplate"/>
+         <input type="submit" onclick="send(123456789)" value ="Search" />
+         <h:commandButton value="Gestolen" id="follower" onclick="addCar()" actionListener="#{politieBean.addCar}"/>
+        </h:form> 
+        
+         </div>
+        
+         
+         
+        
+    </body>
+
+</html>
+
